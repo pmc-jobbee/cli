@@ -1,7 +1,7 @@
 # SHELL := $(shell echo $$SHELL)
 
-APP_NAME=pmc-jobbee-cli
-PROJECT_NAME := "pmc-jobbee-cli"
+APP_NAME=pmc-jobbee
+PROJECT_NAME := "pmc-jobbee"
 VERSION := $(shell cat ../VERSION)
 HASH := $(shell git describe --always)
 TODAY := $(shell date "+%F %H:%M")
@@ -22,11 +22,11 @@ clean:
 	rm $(PROJECT_NAME) "$(PROJECT_NAME)_linux" "$(PROJECT_NAME)_rpi"
 
 prepare_code: *.go
-	cat app_version.tmpl > app_version.go
-	sed $(sed_params) 's/__APP_NAME__/$(APP_NAME)/g' app_version.go
-	sed $(sed_params) 's/__APP_VERSION__/$(VERSION)/g' app_version.go
-	sed $(sed_params) 's/__APP_GIT_HASH__/$(HASH)/g' app_version.go
-	sed $(sed_params) 's/__APP_BUILD_DATE__/$(TODAY)/g' app_version.go
+	cat app/app_version.tmpl > app/app_version.go
+	sed $(sed_params) 's/__APP_NAME__/$(APP_NAME)/g' app/app_version.go
+	sed $(sed_params) 's/__APP_VERSION__/$(VERSION)/g' app/app_version.go
+	sed $(sed_params) 's/__APP_GIT_HASH__/$(HASH)/g' app/app_version.go
+	sed $(sed_params) 's/__APP_BUILD_DATE__/$(TODAY)/g' app/app_version.go
 
 build: prepare_code
 	go build -i -v -o "$(PROJECT_NAME)"
